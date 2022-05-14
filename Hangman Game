@@ -1,0 +1,94 @@
+#Step 1 
+import random
+word_list = ["aardvark", "baboon", "camel"]
+
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+#TODO-1 - Randomly choose a word from the word_list and assign it to a variable called chosen_word.
+
+#TODO-2 - Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
+
+#TODO-3 - Check if the letter the user guessed (guess) is one of the letters in the chosen_word.
+
+chosen_word = random.choice(word_list)
+
+display = []
+lives = 6
+end_of_game = False
+for letter in chosen_word:
+  display += "_"
+
+while not end_of_game:
+  guess = input("Guess a letter:\n").lower()
+  
+  for i in range(len(chosen_word)):
+    if guess == chosen_word[i]:
+      display[i] = guess
+  print(f"\n{' '.join(display)}")
+    
+  if guess not in chosen_word:
+    lives -= 1
+    if lives == 0:
+      end_of_game = True
+      print("You lose.")
+      
+  if "_" not in display:
+    end_of_game = True
+    print("\nYou win!")
+    
+  print(stages[lives])
