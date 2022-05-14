@@ -1,0 +1,93 @@
+import random
+import hangman_words
+import hangman_art
+
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+print(hangman_art.logo)
+chosen_word = random.choice(hangman_words.word_list)
+
+display = []
+lives = 6
+end_of_game = False
+for letter in chosen_word:
+  display += "_"
+
+while not end_of_game:
+  guess = input("Guess a letter:\n").lower()
+  
+  if guess in display:
+    print("\nYou've already guessed {guess}")
+  
+  for i in range(len(chosen_word)):
+    if guess == chosen_word[i]:
+      display[i] = guess
+  print(f"\n{' '.join(display)}")
+    
+  if guess not in chosen_word:
+    print(f"\nYou guessed {guess}, which is not in the word. You lose a life.")
+    lives -= 1
+    if lives == 0:
+      end_of_game = True
+      print("\nYou lose.")
+      
+  if "_" not in display:
+    end_of_game = True
+    print("\nYou win!")
+  
+  print(stages[lives])
