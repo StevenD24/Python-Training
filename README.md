@@ -1,3 +1,3 @@
 # Python-Training
 
-# These projects are what I did while training in Python
+# These are projects that I have developed while training in Python
